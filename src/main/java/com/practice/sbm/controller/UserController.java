@@ -1,7 +1,8 @@
 package com.practice.sbm.controller;
 
-import com.practice.sbm.entity.User;
+import com.practice.sbm.dto.UserDTO;
 import com.practice.sbm.service.UserService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,27 +18,27 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        User createdUser = userService.createUser(user);
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO user){
+        UserDTO createdUser = userService.createUser(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable("id") Long userId){
-        User user = userService.getUserById(userId);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+    public ResponseEntity<UserDTO> getUserById(@PathVariable("id") Long userId){
+        UserDTO userDTO = userService.getUserById(userId);
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getUsers(){
-        List<User> users = userService.getUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+    public ResponseEntity<List<UserDTO>> getUsers(){
+        List<UserDTO> usersDTO = userService.getUsers();
+        return new ResponseEntity<>(usersDTO, HttpStatus.OK);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable Long id){
-        user.setId(id);
-        return new ResponseEntity<>(userService.updateUser(user), HttpStatus.OK);
+    public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody UserDTO userDTO, @PathVariable Long id){
+        userDTO.setId(id);
+        return new ResponseEntity<>(userService.updateUser(userDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")

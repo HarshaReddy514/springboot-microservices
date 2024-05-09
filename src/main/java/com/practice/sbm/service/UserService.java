@@ -1,18 +1,18 @@
 package com.practice.sbm.service;
 
-import com.practice.sbm.entity.User;
+import com.practice.sbm.dto.UserDTO;
 
 import java.util.List;
 
 public interface UserService {
 
-    User createUser(User user);
+    UserDTO createUser(UserDTO user);
 
-    User getUserById(Long userId);
+    UserDTO getUserById(Long userId);
 
-    List<User> getUsers();
+    List<UserDTO> getUsers();
 
-    User updateUser(User user);
+    UserDTO updateUser(UserDTO userDTO);
 
     void deleteUser(Long id);
 }
